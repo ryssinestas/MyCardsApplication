@@ -3,6 +3,7 @@ package com.example.itixexpert.mycardsapplication;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * Created by itix.expert on 17/10/2017.
@@ -10,33 +11,47 @@ import android.view.ViewGroup;
 
 
 public class InicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    private int[] mDataset;
 
     class ViewHolderCardGrande extends RecyclerView.ViewHolder {
 
-        public ViewHolderCardGrande(View itemView) {
+        public TextView mTextView;
 
+        public ViewHolderCardGrande(TextView view) {
+            super(view);
+            mTextView = view;
         }
     }
 
     class ViewHolderDoisCards extends RecyclerView.ViewHolder {
 
-        public ViewHolderDoisCards(View itemView) {
-
+        public TextView mTextView;
+        public ViewHolderDoisCards(TextView view) {
+            super(view);
+            mTextView = view;
         }
     }
 
     class ViewHolderCardPequeno extends RecyclerView.ViewHolder {
 
-        public ViewHolderCardPequeno(View itemView) {
-
+        public TextView mTextView;
+        public ViewHolderCardPequeno(TextView view) {
+            super(view);
+            mTextView = view;
         }
     }
 
     class ViewHolderGaleria extends RecyclerView.ViewHolder {
-        public ViewHolderGaleria(View itemView) {
 
+        public TextView mTextView;
+        public ViewHolderGaleria(TextView view) {
+            super(view);
+            mTextView = view;
         }
+    }
+
+    public InicioAdapter(int[] dataset) {
+        mDataset = dataset;
     }
 
     @Override
@@ -46,21 +61,34 @@ public class InicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             return 3;
         }
 
-
-        return 0;
+        return mDataset[position];
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        TextView tv = new TextView(parent.getContext());
+
         switch (viewType) {
             case 0:
-                return new ViewHolderCardGrande();
+
+                tv.setText("Card Grande");
+
+                return new ViewHolderCardGrande(tv);
             case 1:
-                return new ViewHolderDoisCards();
+
+                tv.setText("Dois Cads");
+
+                return new ViewHolderDoisCards(tv);
             case 2:
-                return new ViewHolderCardPequeno();
+
+                tv.setText("Card Pequeno");
+
+                return new ViewHolderCardPequeno(tv);
             default:
-                return new ViewHolderGaleria();
+
+                tv.setText("Galeria");
+
+                return new ViewHolderGaleria(tv);
         }
     }
 
@@ -83,5 +111,10 @@ public class InicioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 ViewHolderGaleria viewHolderGaleria = (ViewHolderGaleria) holder;
                 break;
         }
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDataset.length;
     }
 }

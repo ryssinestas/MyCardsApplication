@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState == null) {
             InicioFragment fragment = new InicioFragment();
             fragment.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().add(R.id.cards, fragment);
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment);
         }
     }
 
